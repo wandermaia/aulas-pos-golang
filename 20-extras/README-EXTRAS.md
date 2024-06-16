@@ -14,6 +14,15 @@ go mod init github.com/wandermaia/aulas-pos-golang/20-extras/03fsnotify
 
 Aumenta as possibilidades para tabalhar com json.
 
+
+## Webserver
+
+Na versão 1.22 houve uma mudança no serivdor web. Gerneciamento de parâmetros de URL sem a necessidade de roteadores (como o chi, por exemplo).
+
+
+
+
+
 ## Referências
 
 fsnotify
