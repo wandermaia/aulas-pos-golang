@@ -1,0 +1,2 @@
+# no formato: { "city: "São Paulo", "temp_C": 28.5, "temp_F": 28.5, "temp_K": 28.5 }
+GET http://localhost:8080/rolldice
