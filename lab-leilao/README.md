@@ -30,5 +30,20 @@ go get go.uber.org/zap
 
 ```
 
+Para o desenvolvimento do projeto, será utilizado o mogo-db (executando em docker)
+
+```bash
+
+go get go.mongodb.org/mongo-driver/mongo
+
+```
+Para criar o container do mongodb:
+
+
+```bash
+
+docker container run -d -p 27017:27017 --name auctionsDB mongo
+
+```
 
 ## Referências
