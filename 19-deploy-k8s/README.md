@@ -24,7 +24,7 @@ Gerando a imagem do container e executando (comandos aula)
 
 ```bash
 
-docker build -t wandermaia/19-deploy-k8s:latest -f Dockerfile.prod .
+docker build -t wandermaia/19-deploy-k8s:latest -f Dockerfile .
 
 docker images | grep 19-deploy-k8s
 
