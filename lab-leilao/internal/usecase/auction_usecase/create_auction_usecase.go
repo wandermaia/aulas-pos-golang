@@ -14,10 +14,10 @@ type ProductCondition int64
 type AuctionStatus int64
 
 type AuctionIntputDTO struct {
-	ProductName string           `json:"product_name"`
-	Category    string           `json:"category"`
-	Description string           `json:"description"`
-	Condition   ProductCondition `json:"condition"`
+	ProductName string           `json:"product_name" binding:"required,min=1"` // essas tags são utilizadas no validation: internal/infra/api/web/validation
+	Category    string           `json:"category" binding:"required,min=2"`
+	Description string           `json:"description"  binding:"required,min=10,max=200"`
+	Condition   ProductCondition `json:"condition"` // binding:"oneOf" Um dos pré-configurados
 }
 
 type AuctionOutputDTO struct {

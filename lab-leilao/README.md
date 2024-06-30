@@ -55,4 +55,13 @@ go get github.com/google/uuid
 
 ```
 
+Para validaçõe dos campos json, utilizaremos validator para validação
+
+```bash
+go get github.com/go-playground/validator/v10
+
+go get github.com/gin-gonic/gin/binding
+
+```
+
 ## Referências
