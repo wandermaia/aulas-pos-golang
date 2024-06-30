@@ -5,7 +5,9 @@ import (
 	"time"
 
 	"github.com/wandermaia/aulas-pos-golang/lab-leilao/internal/entity/auction_entity"
+	"github.com/wandermaia/aulas-pos-golang/lab-leilao/internal/entity/bid_entity"
 	"github.com/wandermaia/aulas-pos-golang/lab-leilao/internal/internal_error"
+	"github.com/wandermaia/aulas-pos-golang/lab-leilao/internal/usecase/bid_usecase"
 )
 
 type ProductCondition int64
@@ -28,11 +30,17 @@ type AuctionOutputDTO struct {
 	Timestamp   time.Time        `json:"timestamp" time_format:"2006-01-02 15:04:05"`
 }
 
+type WinningInfoOutputDTO struct {
+	Auction AuctionOutputDTO          `json:"auction"`
+	Bid     *bid_usecase.BidOutputDTO `json:"bid,omitempty"`
+}
+
 // Possui os métodos CreateAuction, FindAuctionById e FindAuction
 type AuctionUseCase struct {
 
 	//Essa interface implementa os métodos de acesso dos repositórios
 	auctionRepositoryInterface auction_entity.AuctionRepositoryInterface
+	bidRepositoryInterface     bid_entity.BidEntityRepository
 }
 
 // Parte do objeto AuctionUseCase

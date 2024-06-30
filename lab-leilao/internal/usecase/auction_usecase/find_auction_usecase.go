@@ -5,6 +5,7 @@ import (
 
 	"github.com/wandermaia/aulas-pos-golang/lab-leilao/internal/entity/auction_entity"
 	"github.com/wandermaia/aulas-pos-golang/lab-leilao/internal/internal_error"
+	"github.com/wandermaia/aulas-pos-golang/lab-leilao/internal/usecase/bid_usecase"
 )
 
 // Parte do objeto AuctionUseCase
@@ -53,5 +54,45 @@ func (au AuctionUseCase) FindAuctions(
 	}
 
 	return auctionOutputs, nil
+
+}
+
+func (au AuctionUseCase) FindWinningBidByAuctionId(
+	ctx context.Context, auctionId string) (*WinningInfoOutputDTO, *internal_error.InternalError) {
+	auction, err := au.auctionRepositoryInterface.FindAuctionById(ctx, auctionId)
+	if err != nil {
+		return nil, err
+	}
+
+	auctionOutputDTO := AuctionOutputDTO{
+		Id:          auction.Id,
+		ProductName: auction.ProductName,
+		Category:    auction.Category,
+		Description: auction.Description,
+		Condition:   ProductCondition(auction.Condition),
+		Status:      AuctionStatus(auction.Status),
+		Timestamp:   auction.TimeStamp,
+	}
+
+	bidWinning, err := au.bidRepositoryInterface.FindWinningBidByAuctionId(ctx, auction.Id)
+	if err != nil {
+		return &WinningInfoOutputDTO{
+			Auction: auctionOutputDTO,
+			Bid:     nil,
+		}, nil
+	}
+
+	bidOutputDTO := &bid_usecase.BidOutputDTO{
+		Id:        bidWinning.Id,
+		UserId:    bidWinning.UserId,
+		AuctionId: bidWinning.AuctionId,
+		Amount:    bidWinning.Amount,
+		Timestamp: bidWinning.Timestamp,
+	}
+
+	return &WinningInfoOutputDTO{
+		Auction: auctionOutputDTO,
+		Bid:     bidOutputDTO,
+	}, nil
 
 }
