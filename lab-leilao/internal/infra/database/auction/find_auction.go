@@ -36,7 +36,7 @@ func (ar AuctionRepository) FindAuctionById(
 }
 
 // Função anexada na struct presente no arquivo create_auction.go
-func (ar AuctionRepository) FindAuction(
+func (ar AuctionRepository) FindAuctions(
 	ctx context.Context,
 	status auction_entity.AuctionStatus,
 	category, productName string) ([]auction_entity.Auction, *internal_error.InternalError) {

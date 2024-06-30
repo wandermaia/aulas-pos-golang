@@ -46,4 +46,13 @@ docker container run -d -p 27017:27017 --name auctionsDB mongo
 
 ```
 
+
+Adicionar o pacote do uuid
+
+
+```bash
+go get github.com/google/uuid
+
+```
+
 ## Referências

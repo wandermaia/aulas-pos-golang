@@ -19,6 +19,13 @@ func NewInternalServerError(message string) *InternalError {
 	}
 }
 
+func NewBadRequestError(message string) *InternalError {
+	return &InternalError{
+		Message: message,
+		Err:     "bad_request",
+	}
+}
+
 func (ie *InternalError) Error() string {
 	return ie.Message
 }
