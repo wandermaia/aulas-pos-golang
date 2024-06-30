@@ -60,7 +60,7 @@ func (bd BidRepository) CreateBid(
 				Id:        bidValue.Id,
 				UserId:    bidValue.UserId,
 				AuctionId: bidValue.AuctionId,
-				Amount:    bid.Amount,
+				Amount:    bidValue.Amount,
 				Timestamp: bidValue.Timestamp.Unix(),
 			}
 
@@ -74,5 +74,5 @@ func (bd BidRepository) CreateBid(
 	}
 
 	wg.Wait()
-	return
+	return nil
 }

@@ -30,6 +30,7 @@ func NewUserRepository(database *mongo.Database) *UserRespository {
 
 // Função anexada no UserRespository
 // Neste caso é retornado um user_entity porque quem vai chamar essa função é a aplicação
+// Implementa a interface UserRepositoryInterface do UserEntity
 func (ur *UserRespository) FindUserById(ctx context.Context, userId string) (*user_entity.User, *internal_error.InternalError) {
 
 	filter := bson.M{"_id": userId}
