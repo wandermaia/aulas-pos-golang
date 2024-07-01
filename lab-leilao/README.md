@@ -64,4 +64,12 @@ go get github.com/gin-gonic/gin/binding
 
 ```
 
+
+Para gerenciar as rotas, será utilizado o router gin-gonic
+
+```bash
+go get github.com/gin-gonic/gin
+
+```
+
 ## Referências

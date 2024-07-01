@@ -56,7 +56,7 @@ func NewBidUseCase(bidRepository bid_entity.BidEntityRepository) BidUseCaseInter
 var bidBatch []bid_entity.Bid
 
 type BidUseCaseInterface interface {
-	CreateBid(ctx context.Context, bidBidInputDTO BidInputDTO) *internal_error.InternalError
+	CreateBid(ctx context.Context, bidInputDTO BidInputDTO) *internal_error.InternalError
 	FindWinningBidByAuctionId(ctx context.Context, auctionId string) (*BidOutputDTO, *internal_error.InternalError)
 	FindBidByAuctionId(ctx context.Context, auctionId string) ([]BidOutputDTO, *internal_error.InternalError)
 }
@@ -104,9 +104,9 @@ func (bu *BidUseCase) triggerCreateRoutine(ctx context.Context) {
 
 func (bu *BidUseCase) CreateBid(
 	ctx context.Context,
-	bidBidInputDTO BidInputDTO) *internal_error.InternalError {
+	bidInputDTO BidInputDTO) *internal_error.InternalError {
 
-	bidEntity, err := bid_entity.CreateBid(bidBidInputDTO.UserId, bidBidInputDTO.AuctionId, bidBidInputDTO.Amount)
+	bidEntity, err := bid_entity.CreateBid(bidInputDTO.UserId, bidInputDTO.AuctionId, bidInputDTO.Amount)
 	if err != nil {
 		return err
 	}

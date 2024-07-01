@@ -26,6 +26,13 @@ type BidRepository struct {
 	AuctionRepository *auction.AuctionRepository
 }
 
+func NewBidRepository(database *mongo.Database, auctionRepository *auction.AuctionRepository) *BidRepository {
+	return &BidRepository{
+		Collection:        database.Collection("bids"),
+		AuctionRepository: auctionRepository,
+	}
+}
+
 // Parte do objeto BidRepository
 func (bd BidRepository) CreateBid(
 	ctx context.Context,

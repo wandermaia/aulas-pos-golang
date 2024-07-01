@@ -16,6 +16,12 @@ type UserOutputDTO struct {
 	Name string `json:"name"`
 }
 
+func NewUserUseCase(userRepository user_entity.UserRepositoryInterface) UserUseCaseInterface {
+	return &UserUseCase{
+		UserRepository: userRepository,
+	}
+}
+
 type UserUseCaseInterface interface {
 	FindUserById(
 		ctx context.Context,

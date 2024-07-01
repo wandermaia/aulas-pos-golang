@@ -43,6 +43,32 @@ type AuctionUseCase struct {
 	bidRepositoryInterface     bid_entity.BidEntityRepository
 }
 
+func NewAuctionUseCase(
+	auctionRepositoryInterface auction_entity.AuctionRepositoryInterface,
+	bidRepositoryInterface bid_entity.BidEntityRepository) AuctionUseCaseInterface {
+	return &AuctionUseCase{
+		auctionRepositoryInterface: auctionRepositoryInterface,
+		bidRepositoryInterface:     bidRepositoryInterface,
+	}
+}
+
+type AuctionUseCaseInterface interface {
+	CreateAuction(
+		ctx context.Context,
+		auctionIntput AuctionIntputDTO) *internal_error.InternalError
+
+	FindAuctionById(
+		ctx context.Context, id string) (*AuctionOutputDTO, *internal_error.InternalError)
+
+	FindAuctions(
+		ctx context.Context,
+		status AuctionStatus,
+		category, productName string) ([]AuctionOutputDTO, *internal_error.InternalError)
+
+	FindWinningBidByAuctionId(
+		ctx context.Context, auctionId string) (*WinningInfoOutputDTO, *internal_error.InternalError)
+}
+
 // Parte do objeto AuctionUseCase
 func (au AuctionUseCase) CreateAuction(
 	ctx context.Context,

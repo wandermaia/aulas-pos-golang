@@ -2,6 +2,8 @@ package rest_err
 
 import (
 	"net/http"
+
+	"github.com/wandermaia/aulas-pos-golang/lab-leilao/internal/internal_error"
 )
 
 // Anexa a função Error implementada abaixo
@@ -23,14 +25,16 @@ func (r *RestErr) Error() string {
 	return r.Message
 }
 
-// func NewBadRequestValidationError(message string, causes ...Causes) *RestErr {
-// 	return &RestErr{
-// 		Message: message,
-// 		Err:     "bad_request",
-// 		Code:    http.StatusBadRequest,
-// 		Causes:  nil,
-// 	}
-// }
+func ConvertError(internalError *internal_error.InternalError) *RestErr {
+	switch internalError.Err {
+	case "bad_request":
+		return NewBadRequestError(internalError.Error())
+	case "not_found":
+		return NewNotFoundError(internalError.Error())
+	default:
+		return NewInternalServerError(internalError.Error())
+	}
+}
 
 func NewBadRequestError(message string, causes ...Causes) *RestErr {
 	return &RestErr{
@@ -50,7 +54,7 @@ func NewInternalServerError(message string) *RestErr {
 	}
 }
 
-func NewNotFoundErrorError(message string) *RestErr {
+func NewNotFoundError(message string) *RestErr {
 	return &RestErr{
 		Message: message,
 		Err:     "not_found",

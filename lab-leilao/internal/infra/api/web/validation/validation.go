@@ -32,7 +32,7 @@ func ValidateErr(validation_err error) *rest_err.RestErr {
 	var jsonValidation validator.ValidationErrors
 
 	if errors.As(validation_err, &jsonErr) {
-		return rest_err.NewNotFoundErrorError("Invalid type error")
+		return rest_err.NewNotFoundError("Invalid type error")
 
 		// Esse é o local onde os bindings das tags do json serão tratados
 	} else if errors.As(validation_err, &jsonValidation) {
